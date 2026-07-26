@@ -3,34 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#d97706">
+<meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>卡密管理</title>
 <style>
 :root {
-  --bg: #fef9f3;
-  --bg-2: #fdf3e7;
-  --card: #ffffff;
-  --text: #451a03;
-  --text-2: #92847a;
-  --text-3: #b8a99a;
-  --border: #f5e6d8;
-  --border-2: #ecd9c5;
-  --primary: #d97706;
-  --primary-d: #b45309;
-  --primary-l: #fef3c7;
-  --green: #16a34a;
-  --green-l: #dcfce7;
-  --red: #dc2626;
-  --red-l: #fee2e2;
-  --orange: #ea580c;
-  --blue: #0284c7;
-  --blue-l: #e0f2fe;
-  --shadow: 0 2px 8px rgba(146, 64, 14, 0.06), 0 1px 2px rgba(146, 64, 14, 0.04);
-  --shadow-lg: 0 8px 24px rgba(146, 64, 14, 0.10), 0 2px 6px rgba(146, 64, 14, 0.06);
-  --radius: 16px;
-  --radius-sm: 12px;
+  --bg: #ffffff;
+  --bg-soft: #fafafa;
+  --bg-hover: #f5f5f5;
+  --text: #111111;
+  --text-2: #6b6b6b;
+  --text-3: #999999;
+  --border: #e8e8e8;
+  --border-strong: #1a1a1a;
+  --accent: #000000;
+  --green: #0071e3;
+  --green-bg: #f0f7ff;
+  --orange: #ff9500;
+  --orange-bg: #fff8ed;
+  --red: #ff3b30;
+  --red-bg: #fff0f0;
+  --radius: 14px;
+  --radius-sm: 10px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -38,64 +33,52 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 html, body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   background: var(--bg);
   color: var(--text);
   font-size: 15px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
 }
 
 body {
   min-height: 100vh;
-  padding-bottom: calc(96px + var(--safe-bottom));
-  background-image:
-    radial-gradient(circle at 0% 0%, rgba(217, 119, 6, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 100% 100%, rgba(234, 88, 12, 0.04) 0%, transparent 40%);
+  padding-bottom: calc(100px + var(--safe-bottom));
+  background: var(--bg);
 }
 
+/* 顶部 Header */
 .header {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
-  color: white;
-  padding: calc(16px + var(--safe-top)) 16px 18px;
+  background: var(--bg);
+  padding: calc(16px + var(--safe-top)) 20px 0;
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 4px 20px rgba(180, 83, 9, 0.15);
+  border-bottom: 1px solid var(--border);
 }
 
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  padding-bottom: 16px;
 }
 
 .header h1 {
-  font-size: 19px;
+  font-size: 28px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.header h1 .logo {
-  font-size: 22px;
-}
-
-.top-actions {
-  display: flex;
-  gap: 6px;
+  letter-spacing: -0.03em;
+  color: var(--text);
 }
 
 .icon-btn {
-  background: rgba(255,255,255,0.22);
-  border: none;
-  color: white;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
   font-size: 18px;
   cursor: pointer;
   display: flex;
@@ -104,175 +87,194 @@ body {
   transition: all 0.15s;
 }
 
-.icon-btn:active { background: rgba(255,255,255,0.4); transform: scale(0.95); }
+.icon-btn:active { background: var(--bg-hover); transform: scale(0.95); }
 
-.section-label {
+/* 统计区 */
+.stats-section {
+  padding: 20px 20px 24px;
+}
+
+.section-title {
   font-size: 11px;
-  opacity: 0.8;
-  margin-bottom: 8px;
+  color: var(--text-3);
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  margin-bottom: 14px;
 }
 
 .stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
 
 .stat {
-  background: rgba(255,255,255,0.18);
-  border-radius: 14px;
-  padding: 12px 14px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: var(--bg);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 88px;
 }
 
 .stat-label {
-  font-size: 11px;
-  opacity: 0.9;
-  margin-bottom: 4px;
+  font-size: 12px;
+  color: var(--text-2);
   font-weight: 500;
+  margin-bottom: 6px;
 }
 
 .stat-value {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  font-feature-settings: "tnum";
 }
 
-.stat-value.profit { color: #fef9c3; }
-.stat-value.cost { color: #fed7aa; }
-.stat-value.income { color: #bbf7d0; }
+.stat-value.profit { color: var(--text); }
+.stat-value.cost { color: var(--text-2); }
+.stat-value.income { color: var(--text); }
 
-.today-section {
-  margin-top: 12px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 14px;
-  padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,0.15);
-}
-
-.today-row {
+/* 今日数据条 */
+.today-bar {
+  margin: 14px 20px 0;
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.today-label {
+  font-size: 12px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.today-stats {
+  display: flex;
+  gap: 20px;
   align-items: center;
 }
 
 .today-item {
-  text-align: center;
-  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
 }
 
-.today-label {
+.today-item-label {
   font-size: 11px;
-  opacity: 0.85;
-  margin-bottom: 4px;
+  color: var(--text-3);
 }
 
-.today-value {
-  font-size: 17px;
+.today-item-value {
+  font-size: 16px;
   font-weight: 700;
+  color: var(--text);
+  font-feature-settings: "tnum";
 }
 
-.today-divider {
-  width: 1px;
-  height: 30px;
-  background: rgba(255,255,255,0.25);
-  margin: 0 8px;
+.today-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin-right: 8px;
 }
 
+/* 主区域 */
 .main {
-  padding: 14px 12px;
+  padding: 24px 20px 20px;
   max-width: 640px;
   margin: 0 auto;
 }
 
-.toolbar-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 12px;
-  box-shadow: var(--shadow);
-  margin-bottom: 12px;
+/* 工具栏 */
+.toolbar {
+  margin-bottom: 20px;
 }
 
-.filters {
+.filter-row {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
 }
 
-.filters::-webkit-scrollbar { display: none; }
+.filter-row::-webkit-scrollbar { display: none; }
+
+.filter-row:last-child { margin-bottom: 0; }
 
 .chip {
   white-space: nowrap;
   padding: 8px 16px;
   border-radius: 20px;
-  background: var(--bg-2);
+  background: var(--bg);
   border: 1px solid var(--border);
   font-size: 13px;
   color: var(--text-2);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
   font-weight: 500;
 }
 
 .chip.active {
-  background: linear-gradient(135deg, var(--primary), var(--primary-d));
-  color: white;
-  border-color: var(--primary-d);
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
 }
-
-.filter-row {
-  margin-bottom: 8px;
-}
-
-.filter-row:last-child { margin-bottom: 0; }
 
 .search-wrap {
-  margin-bottom: 0;
+  position: relative;
+  margin-top: 10px;
 }
 
 .search {
   width: 100%;
-  padding: 11px 14px 11px 40px;
-  border-radius: 12px;
+  padding: 12px 16px 12px 42px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: var(--bg-2);
+  background: var(--bg-soft);
   font-size: 14px;
   outline: none;
   font-family: inherit;
-  transition: all 0.2s;
+  transition: all 0.15s;
+  color: var(--text);
 }
 
-.search:focus { border-color: var(--primary); background: var(--card); }
+.search:focus {
+  border-color: var(--accent);
+  background: var(--bg);
+}
 
 .search-icon {
-  position: relative;
-  display: block;
-}
-
-.search-icon::before {
-  content: "🔍";
   position: absolute;
-  left: 14px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 14px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.4;
   pointer-events: none;
-  z-index: 1;
 }
 
+/* 列表头部 */
 .list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  padding: 0 4px;
+  margin-bottom: 12px;
+  padding: 0 2px;
 }
 
 .list-header-info {
@@ -282,199 +284,251 @@ body {
 }
 
 .list-header-info b {
-  color: var(--primary-d);
+  color: var(--text);
   font-weight: 700;
 }
 
 .btn-clear-used {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
-  color: #92400e;
-  border: 1px solid #fcd34d;
-  padding: 7px 14px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 4px;
-  transition: all 0.2s;
+  gap: 5px;
+  transition: all 0.15s;
   font-family: inherit;
 }
 
-.btn-clear-used:active { transform: scale(0.95); }
-.btn-clear-used:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-clear-used:active { transform: scale(0.96); background: var(--bg-hover); }
+.btn-clear-used:disabled { opacity: 0.35; cursor: not-allowed; }
 
+.btn-clear-used svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* 卡片列表 */
 .card-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
 }
 
 .card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 14px;
-  box-shadow: var(--shadow);
-  border-left: 4px solid transparent;
-  transition: all 0.2s;
+  background: var(--bg);
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.15s;
   position: relative;
-  overflow: hidden;
 }
 
-.card:active { transform: scale(0.99); }
+.card:last-child { border-bottom: none; }
 
-.card.test { border-left-color: var(--text-3); }
-.card.half { border-left-color: var(--blue); }
-.card.day  { border-left-color: var(--green); }
+.card:active { background: var(--bg-soft); }
 
-.card.used {
-  background: linear-gradient(135deg, var(--card) 0%, var(--bg-2) 100%);
+.card.test .card-code::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-3);
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
-.card.used::after {
-  content: "已使用";
-  position: absolute;
-  top: 12px;
-  right: -32px;
+.card.half .card-code::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
   background: var(--green);
-  color: white;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 36px;
-  transform: rotate(35deg);
-  letter-spacing: 1px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.card.day .card-code::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 .card-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
 .card-code {
-  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
   font-size: 15px;
   font-weight: 600;
   word-break: break-all;
   flex: 1;
   color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.card-status {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--bg-soft);
+  white-space: nowrap;
+}
+
+.card-status.used {
+  color: var(--green);
+  background: var(--green-bg);
 }
 
 .card-meta {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 10px;
   font-size: 12px;
-  color: var(--text-2);
+  color: var(--text-3);
   flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
-.badge {
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
+.card-meta-divider {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-3);
+  opacity: 0.5;
 }
 
-.badge.test { background: #f3f4f6; color: var(--text-2); }
-.badge.half { background: var(--blue-l); color: #075985; }
-.badge.day  { background: var(--green-l); color: #166534; }
-
-.status {
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
+.card-cat {
+  font-weight: 500;
+  color: var(--text-2);
 }
 
-.status.unused { background: var(--primary-l); color: var(--primary-d); }
-.status.used { background: var(--green-l); color: #166534; }
-
-.card-time { color: var(--text-3); font-size: 11px; }
+.card-price {
+  font-variant-numeric: tabular-nums;
+}
 
 .card-actions {
   display: flex;
   gap: 6px;
-  margin-top: 12px;
   flex-wrap: wrap;
 }
 
 .btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: none;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.12s;
   font-family: inherit;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  color: var(--text);
 }
 
-.btn:active { transform: scale(0.95); }
+.btn:active { transform: scale(0.96); background: var(--bg-hover); }
 
-.btn-use { background: var(--green-l); color: #166534; }
-.btn-use:active { background: #bbf7d0; }
+.btn-use {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
 
-.btn-restore { background: var(--primary-l); color: var(--primary-d); }
-.btn-restore:active { background: #fde68a; }
+.btn-use:active { background: #333; }
 
-.btn-copy { background: var(--blue-l); color: #075985; }
-.btn-copy:active { background: #bae6fd; }
+.btn-restore {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--border);
+}
 
-.btn-del { background: #f3f4f6; color: var(--text-2); }
-.btn-del:active { background: #e5e7eb; }
-
-.empty {
-  text-align: center;
-  padding: 70px 20px;
+.btn-copy {
+  background: var(--bg);
   color: var(--text-2);
 }
 
+.btn-del {
+  background: var(--bg);
+  color: var(--text-3);
+  border-color: var(--border);
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-3);
+}
+
 .empty-icon {
-  font-size: 56px;
-  margin-bottom: 14px;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 18px;
   opacity: 0.3;
 }
 
-.empty-text { font-size: 14px; margin-bottom: 6px; }
-.empty-sub { font-size: 12px; color: var(--text-3); }
+.empty-text {
+  font-size: 15px;
+  color: var(--text-2);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
 
+.empty-sub {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+/* FAB */
 .fab {
   position: fixed;
   bottom: calc(24px + var(--safe-bottom));
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
+  background: var(--accent);
+  color: var(--bg);
   border: none;
-  padding: 15px 40px;
-  border-radius: 30px;
+  padding: 16px 40px;
+  border-radius: 100px;
   font-size: 15px;
-  font-weight: 700;
-  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45), 0 2px 6px rgba(217, 119, 6, 0.3);
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   z-index: 20;
   transition: all 0.15s;
   font-family: inherit;
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  letter-spacing: -0.01em;
 }
 
-.fab:active { transform: translateX(-50%) scale(0.95); }
+.fab:active {
+  transform: translateX(-50%) scale(0.96);
+  background: #333;
+}
 
+/* 模态框 */
 .modal-mask {
   position: fixed;
   inset: 0;
-  background: rgba(69, 26, 3, 0.5);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 100;
   display: none;
   align-items: flex-end;
@@ -484,12 +538,12 @@ body {
 .modal-mask.show { display: flex; }
 
 .modal {
-  background: var(--card);
+  background: var(--bg);
   width: 100%;
   max-width: 640px;
-  border-radius: 24px 24px 0 0;
-  padding: 22px 18px calc(22px + var(--safe-bottom));
-  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px 20px 0 0;
+  padding: 24px 20px calc(24px + var(--safe-bottom));
+  animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   max-height: 90vh;
   overflow-y: auto;
 }
@@ -500,15 +554,16 @@ body {
 }
 
 .modal-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
   text-align: center;
   color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 .field {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .field-label {
@@ -521,63 +576,79 @@ body {
 
 .field-input {
   width: 100%;
-  padding: 13px 16px;
-  border-radius: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: var(--bg-2);
+  background: var(--bg-soft);
   font-size: 15px;
   outline: none;
   font-family: inherit;
-  transition: all 0.2s;
+  transition: all 0.15s;
+  color: var(--text);
 }
 
-.field-input:focus { border-color: var(--primary); background: var(--card); box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1); }
+.field-input:focus {
+  border-color: var(--accent);
+  background: var(--bg);
+}
 
 textarea.field-input {
   resize: vertical;
   min-height: 100px;
-  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
   font-size: 14px;
 }
 
 .cat-options {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 
 .cat-opt {
   padding: 14px 8px;
-  border-radius: 14px;
-  border: 2px solid var(--border);
-  background: var(--bg-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .cat-opt.selected {
-  border-color: var(--primary);
-  background: linear-gradient(135deg, var(--primary-l), #fef9c3);
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
+  border-color: var(--accent);
+  background: var(--bg);
+  border-width: 2px;
+  padding: 13px 7px;
 }
 
-.cat-opt-name { font-size: 14px; font-weight: 700; pointer-events: none; }
-.cat-opt-price { font-size: 11px; color: var(--text-2); margin-top: 4px; pointer-events: none; }
+.cat-opt-name {
+  font-size: 14px;
+  font-weight: 600;
+  pointer-events: none;
+  color: var(--text);
+}
+
+.cat-opt-price {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 4px;
+  pointer-events: none;
+}
 
 .modal-actions {
   display: flex;
   gap: 10px;
-  margin-top: 22px;
+  margin-top: 24px;
 }
 
 .btn-block {
   flex: 1;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 15px;
+  border-radius: var(--radius-sm);
   border: none;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   font-family: inherit;
   transition: all 0.15s;
@@ -585,70 +656,96 @@ textarea.field-input {
 
 .btn-block:active { transform: scale(0.98); }
 
-.btn-cancel { background: var(--bg-2); color: var(--text-2); }
-.btn-cancel:active { background: var(--border); }
-.btn-primary { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3); }
-.btn-primary:active { background: var(--primary-d); }
+.btn-cancel {
+  background: var(--bg-soft);
+  color: var(--text-2);
+}
 
+.btn-cancel:active { background: var(--bg-hover); }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.btn-primary:active { background: #333; }
+
+/* Toast */
 .toast {
   position: fixed;
   bottom: 120px;
   left: 50%;
-  transform: translateX(-50%);
-  background: rgba(69, 26, 3, 0.95);
-  color: white;
-  padding: 12px 22px;
-  border-radius: 24px;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(0, 0, 0, 0.9);
+  color: var(--bg);
+  padding: 12px 20px;
+  border-radius: 100px;
   font-size: 13px;
   z-index: 200;
   opacity: 0;
-  transition: opacity 0.25s, transform 0.25s;
+  transition: all 0.25s;
   pointer-events: none;
   white-space: nowrap;
   font-weight: 500;
+  backdrop-filter: blur(10px);
 }
 
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
-
-.confirm-wrap {
-  align-items: center;
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
+
+/* 确认框 */
+.confirm-wrap { align-items: center; }
 
 .confirm-modal {
-  background: var(--card);
-  width: 82%;
-  max-width: 340px;
-  border-radius: 20px;
-  padding: 24px 22px;
+  background: var(--bg);
+  width: 86%;
+  max-width: 320px;
+  border-radius: 16px;
+  padding: 28px 24px 20px;
   text-align: center;
-  animation: scaleIn 0.25s ease;
+  animation: scaleIn 0.2s ease;
 }
 
 @keyframes scaleIn {
-  from { transform: scale(0.85); opacity: 0; }
+  from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
-.confirm-icon {
-  font-size: 40px;
-  margin-bottom: 12px;
+.confirm-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
 }
 
 .confirm-text {
-  margin-bottom: 20px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--text);
+  margin-bottom: 22px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
   white-space: pre-line;
 }
 
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.confirm-actions .btn-block {
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* 菜单 */
 .menu-sheet {
-  background: var(--card);
+  background: var(--bg);
   width: 100%;
   max-width: 640px;
-  border-radius: 24px 24px 0 0;
-  padding: 14px 18px calc(22px + var(--safe-bottom));
-  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px 20px 0 0;
+  padding: 12px 8px calc(20px + var(--safe-bottom));
+  animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .menu-header {
@@ -656,51 +753,54 @@ textarea.field-input {
   font-size: 13px;
   color: var(--text-3);
   font-weight: 600;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  letter-spacing: 0.05em;
 }
 
 .menu-item {
-  padding: 16px 6px;
+  padding: 16px 16px;
   font-size: 15px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.15s;
+  transition: all 0.12s;
+  color: var(--text);
+  font-weight: 500;
 }
 
-.menu-item:last-child { border-bottom: none; }
-.menu-item:active { background: var(--bg-2); }
-
-.menu-item-icon {
-  font-size: 18px;
-  margin-right: 4px;
-}
+.menu-item:last-of-type { border-bottom: none; }
+.menu-item:active { background: var(--bg-hover); }
 
 .menu-item.danger { color: var(--red); }
 .menu-item.danger .menu-item-arrow { color: var(--red); }
 
-.menu-item-arrow { color: var(--text-3); font-size: 16px; }
+.menu-item-arrow {
+  color: var(--text-3);
+  font-size: 18px;
+  font-weight: 400;
+}
 
 .menu-cancel {
   margin-top: 10px;
   text-align: center;
   padding: 15px;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-2);
   cursor: pointer;
-  background: var(--bg-2);
-  border-radius: 12px;
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
 }
 
-.menu-cancel:active { background: var(--border); }
+.menu-cancel:active { background: var(--bg-hover); }
 
 @media (min-width: 640px) {
   .stats { grid-template-columns: repeat(4, 1fr); }
-  .stat-value { font-size: 24px; }
+  .stat-value { font-size: 28px; }
+  .header h1 { font-size: 32px; }
 }
 </style>
 </head>
@@ -708,16 +808,23 @@ textarea.field-input {
 
 <div class="header">
   <div class="header-top">
-    <h1><span class="logo">📒</span>卡密管理</h1>
-    <div class="top-actions">
-      <button class="icon-btn" id="menuBtn" title="菜单">≡</button>
-    </div>
+    <h1>卡密</h1>
+    <button class="icon-btn" id="menuBtn" aria-label="菜单">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="6" x2="20" y2="6"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <line x1="4" y1="18" x2="20" y2="18"/>
+      </svg>
+    </button>
   </div>
-  <div class="section-label">累计统计</div>
+</div>
+
+<div class="stats-section">
+  <div class="section-title">总览</div>
   <div class="stats">
     <div class="stat">
       <div class="stat-label">已卖出</div>
-      <div class="stat-value" id="statSold">0 张</div>
+      <div class="stat-value" id="statSold">0</div>
     </div>
     <div class="stat">
       <div class="stat-label">总成本</div>
@@ -732,47 +839,55 @@ textarea.field-input {
       <div class="stat-value profit" id="statProfit">¥0</div>
     </div>
   </div>
-  <div class="today-section">
-    <div class="today-row">
-      <div class="today-item">
-        <div class="today-label">今日卖出</div>
-        <div class="today-value" id="todaySold">0 张</div>
-      </div>
-      <div class="today-divider"></div>
-      <div class="today-item">
-        <div class="today-label">今日利润</div>
-        <div class="today-value" id="todayProfit">¥0</div>
-      </div>
+</div>
+
+<div class="today-bar">
+  <div class="today-label">
+    <span class="today-dot"></span>今日
+  </div>
+  <div class="today-stats">
+    <div class="today-item">
+      <span class="today-item-label">卖出</span>
+      <span class="today-item-value" id="todaySold">0</span>
+    </div>
+    <div class="today-item">
+      <span class="today-item-label">利润</span>
+      <span class="today-item-value" id="todayProfit">¥0</span>
     </div>
   </div>
 </div>
 
 <div class="main">
-  <div class="toolbar-card">
-    <div class="filter-row">
-      <div class="filters" id="catFilters">
-        <div class="chip active" data-cat="all">全部类别</div>
-        <div class="chip" data-cat="test">测试卡</div>
-        <div class="chip" data-cat="half">半天卡</div>
-        <div class="chip" data-cat="day">天卡</div>
-      </div>
+  <div class="toolbar">
+    <div class="filter-row" id="catFilters">
+      <div class="chip active" data-cat="all">全部</div>
+      <div class="chip" data-cat="test">测试卡</div>
+      <div class="chip" data-cat="half">半天卡</div>
+      <div class="chip" data-cat="day">天卡</div>
     </div>
-    <div class="filter-row">
-      <div class="filters" id="statusFilters">
-        <div class="chip active" data-status="all">全部状态</div>
-        <div class="chip" data-status="unused">未使用</div>
-        <div class="chip" data-status="used">已使用</div>
-      </div>
+    <div class="filter-row" id="statusFilters">
+      <div class="chip active" data-status="all">全部状态</div>
+      <div class="chip" data-status="unused">未使用</div>
+      <div class="chip" data-status="used">已使用</div>
     </div>
-    <div class="search-wrap search-icon">
-      <input type="search" class="search" id="searchInput" placeholder="搜索卡号...">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7"/>
+        <line x1="21" y1="21" x2="16.5" y2="16.5"/>
+      </svg>
+      <input type="search" class="search" id="searchInput" placeholder="搜索卡号">
     </div>
   </div>
 
   <div class="list-header">
-    <span class="list-header-info" id="listCount">共 0 张</span>
-    <button class="btn-clear-used" id="quickClearUsed" title="一键清除已使用的卡密">
-      <span>🧹</span><span>一键清除已使用</span>
+    <span class="list-header-info" id="listCount">共 <b>0</b> 张</span>
+    <button class="btn-clear-used" id="quickClearUsed">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <polyline points="3 6 5 6 21 6"/>
+        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+        <path d="M10 11v6M14 11v6"/>
+      </svg>
+      <span id="clearUsedText">清除已使用</span>
     </button>
   </div>
 
@@ -781,9 +896,10 @@ textarea.field-input {
 
 <button class="fab" id="addBtn">+ 添加卡密</button>
 
+<!-- 添加模态框 -->
 <div class="modal-mask" id="addModal">
   <div class="modal">
-    <div class="modal-title" id="modalTitle">添加卡密</div>
+    <div class="modal-title">添加卡密</div>
     <div class="field">
       <label class="field-label">卡号 / 密钥</label>
       <textarea class="field-input" id="codeInput" placeholder="输入卡号或密钥（可批量粘贴，每行一个）"></textarea>
@@ -812,24 +928,38 @@ textarea.field-input {
   </div>
 </div>
 
+<!-- 确认框 -->
 <div class="modal-mask confirm-wrap" id="confirmMask">
   <div class="confirm-modal">
-    <div class="confirm-icon" id="confirmIcon">❓</div>
-    <div class="confirm-text" id="confirmText">确认操作？</div>
-    <div class="modal-actions">
+    <div class="confirm-title" id="confirmTitle">确认操作</div>
+    <div class="confirm-text" id="confirmText"></div>
+    <div class="confirm-actions">
       <button class="btn-block btn-cancel" id="confirmCancel">取消</button>
       <button class="btn-block btn-primary" id="confirmOk">确定</button>
     </div>
   </div>
 </div>
 
+<!-- 菜单 -->
 <div class="modal-mask" id="menuMask">
   <div class="menu-sheet">
     <div class="menu-header">菜单</div>
-    <div class="menu-item" id="menuExport"><span><span class="menu-item-icon">📤</span>导出备份</span><span class="menu-item-arrow">›</span></div>
-    <div class="menu-item" id="menuImport"><span><span class="menu-item-icon">📥</span>导入备份</span><span class="menu-item-arrow">›</span></div>
-    <div class="menu-item" id="menuClearUsed"><span><span class="menu-item-icon">🧹</span>清除已使用记录</span><span class="menu-item-arrow">›</span></div>
-    <div class="menu-item danger" id="menuClearAll"><span><span class="menu-item-icon">⚠️</span>清空所有数据</span><span class="menu-item-arrow">›</span></div>
+    <div class="menu-item" id="menuExport">
+      <span>导出备份</span>
+      <span class="menu-item-arrow">›</span>
+    </div>
+    <div class="menu-item" id="menuImport">
+      <span>导入备份</span>
+      <span class="menu-item-arrow">›</span>
+    </div>
+    <div class="menu-item" id="menuClearUsed">
+      <span>清除已使用记录</span>
+      <span class="menu-item-arrow">›</span>
+    </div>
+    <div class="menu-item danger" id="menuClearAll">
+      <span>清空所有数据</span>
+      <span class="menu-item-arrow">›</span>
+    </div>
     <div class="menu-cancel" id="menuClose">取消</div>
   </div>
 </div>
@@ -853,7 +983,6 @@ let state = {
   filterCat: 'all',
   filterStatus: 'all',
   search: '',
-  editId: null,
   selectedCat: 'test',
   pendingConfirm: null
 };
@@ -862,7 +991,6 @@ function load() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
-      // 兼容旧版本数据迁移
       const oldRaw = localStorage.getItem('cardmgmt_v1');
       if (oldRaw) {
         const oldData = JSON.parse(oldRaw);
@@ -883,7 +1011,6 @@ function load() {
       state.cards = data.cards || [];
       if (data.totals) state.totals = data.totals;
     }
-    // 过滤掉旧的已作废数据
     state.cards = state.cards.filter(c => c.status !== 'scrapped');
   } catch (e) {
     state.cards = [];
@@ -926,9 +1053,9 @@ function toast(msg) {
   toast._t = setTimeout(() => el.classList.remove('show'), 1800);
 }
 
-function showConfirm(text, cb, icon) {
+function showConfirm(title, text, cb) {
+  document.getElementById('confirmTitle').textContent = title;
   document.getElementById('confirmText').textContent = text;
-  document.getElementById('confirmIcon').textContent = icon || '❓';
   document.getElementById('confirmMask').classList.add('show');
   state.pendingConfirm = cb;
 }
@@ -942,7 +1069,7 @@ function render() {
   });
   const profit = income - cost;
 
-  document.getElementById('statSold').textContent = soldCount + ' 张';
+  document.getElementById('statSold').textContent = soldCount;
   document.getElementById('statCost').textContent = fmtMoney(cost);
   document.getElementById('statIncome').textContent = fmtMoney(income);
   document.getElementById('statProfit').textContent = fmtMoney(profit);
@@ -955,9 +1082,10 @@ function render() {
     if (cat) { todayCost += cat.cost; todayIncome += cat.price; }
   });
   const todayProfit = todayIncome - todayCost;
-  document.getElementById('todaySold').textContent = todaySold.length + ' 张';
+  document.getElementById('todaySold').textContent = todaySold.length;
   document.getElementById('todayProfit').textContent = fmtMoney(todayProfit);
 
+  // 筛选
   let list = state.cards.slice();
   if (state.filterCat !== 'all') list = list.filter(c => c.category === state.filterCat);
   if (state.filterStatus !== 'all') list = list.filter(c => c.status === state.filterStatus);
@@ -968,52 +1096,53 @@ function render() {
   list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
   document.getElementById('listCount').innerHTML = '共 <b>' + list.length + '</b> 张';
-  const unusedCount = list.filter(c => c.status === 'unused').length;
-  const usedCount = list.filter(c => c.status === 'used').length;
-  let summaryParts = [];
-  if (unusedCount) summaryParts.push('未使用 ' + unusedCount);
-  if (usedCount) summaryParts.push('已使用 ' + usedCount);
 
-  // 更新一键清除按钮状态
+  // 更新清除按钮
   const clearBtn = document.getElementById('quickClearUsed');
+  const clearText = document.getElementById('clearUsedText');
   const totalUsed = state.cards.filter(c => c.status === 'used').length;
   clearBtn.disabled = totalUsed === 0;
-  if (totalUsed > 0) {
-    clearBtn.querySelector('span:last-child').textContent = '清除已使用 (' + totalUsed + ')';
-  } else {
-    clearBtn.querySelector('span:last-child').textContent = '一键清除已使用';
-  }
+  clearText.textContent = totalUsed > 0 ? '清除 (' + totalUsed + ')' : '清除已使用';
 
   const listEl = document.getElementById('cardList');
   if (list.length === 0) {
-    listEl.innerHTML = '<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">' + (state.cards.length ? '没有符合条件的卡密' : '还没有卡密记录') + '</div><div class="empty-sub">' + (state.cards.length ? '试试调整筛选条件' : '点击下方按钮添加第一张卡密') + '</div></div>';
+    listEl.innerHTML = '<div class="empty">' +
+      '<svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">' +
+      '<rect x="3" y="4" width="18" height="16" rx="2"/>' +
+      '<line x1="8" y1="10" x2="16" y2="10"/>' +
+      '<line x1="8" y1="14" x2="13" y2="14"/>' +
+      '</svg>' +
+      '<div class="empty-text">' + (state.cards.length ? '没有符合条件的卡密' : '还没有卡密记录') + '</div>' +
+      '<div class="empty-sub">' + (state.cards.length ? '试试调整筛选条件' : '点击下方按钮添加第一张') + '</div>' +
+      '</div>';
     return;
   }
 
   listEl.innerHTML = list.map(c => {
     const cat = CATEGORIES[c.category] || { name: '未知' };
-    const statusText = { unused: '未使用', used: '已使用' }[c.status] || c.status;
+    const statusText = c.status === 'used' ? '已使用' : '未使用';
     let actions = '';
     if (c.status === 'unused') {
-      actions = `<button class="btn btn-use" data-act="use" data-id="${c.id}">✓ 标记已使用</button>`;
+      actions = `<button class="btn btn-use" data-act="use" data-id="${c.id}">标记已使用</button>`;
     } else if (c.status === 'used') {
-      actions = `<button class="btn btn-restore" data-act="restore" data-id="${c.id}">↩ 恢复未使用</button>`;
+      actions = `<button class="btn btn-restore" data-act="restore" data-id="${c.id}">恢复</button>`;
     }
     actions += `<button class="btn btn-copy" data-act="copy" data-id="${c.id}">复制</button>
                 <button class="btn btn-del" data-act="del" data-id="${c.id}">删除</button>`;
 
-    const timeLabel = c.status === 'used' && c.usedAt ? '使用于 ' + fmtTime(c.usedAt)
-                    : '添加于 ' + fmtTime(c.createdAt);
+    const timeLabel = c.status === 'used' && c.usedAt ? fmtTime(c.usedAt) : fmtTime(c.createdAt);
+    const timePrefix = c.status === 'used' ? '使用' : '添加';
 
-    return `<div class="card ${c.category} ${c.status === 'used' ? 'used' : ''}">
+    return `<div class="card ${c.category}">
       <div class="card-row">
         <div class="card-code">${escapeHtml(c.code)}</div>
-        ${c.status === 'unused' ? `<span class="status ${c.status}">${statusText}</span>` : ''}
+        <span class="card-status ${c.status}">${statusText}</span>
       </div>
       <div class="card-meta">
-        <span class="badge ${c.category}">${cat.name}</span>
-        ${c.category !== 'test' ? `<span>成本${cat.cost} 售${cat.price}</span>` : ''}
-        <span class="card-time">· ${timeLabel}</span>
+        <span class="card-cat">${cat.name}</span>
+        ${c.category !== 'test' ? `<span class="card-meta-divider"></span><span class="card-price">成本${cat.cost} 售${cat.price}</span>` : ''}
+        <span class="card-meta-divider"></span>
+        <span>${timePrefix}于 ${timeLabel}</span>
       </div>
       <div class="card-actions">${actions}</div>
     </div>`;
@@ -1049,7 +1178,7 @@ function addCards(codes, category) {
 function clearUsedCards() {
   const usedCards = state.cards.filter(c => c.status === 'used');
   if (usedCards.length === 0) { toast('没有已使用的记录'); return; }
-  showConfirm('确认清除 ' + usedCards.length + ' 张已使用的卡密？\n\n（将从列表移除，但累计统计保留）', () => {
+  showConfirm('清除已使用', '确认清除 ' + usedCards.length + ' 张已使用的卡密？\n\n将从列表移除，但累计统计保留。', () => {
     usedCards.forEach(c => {
       const cat = CATEGORIES[c.category];
       if (cat) { state.totals.cost += cat.cost; state.totals.income += cat.price; }
@@ -1058,14 +1187,13 @@ function clearUsedCards() {
     state.cards = state.cards.filter(c => c.status !== 'used');
     save();
     render();
-    toast('已清除 ' + usedCards.length + ' 张，累计统计保留');
-  }, '🧹');
+    toast('已清除 ' + usedCards.length + ' 张');
+  });
 }
 
+// 事件绑定
 document.getElementById('addBtn').addEventListener('click', () => {
-  state.editId = null;
   state.selectedCat = 'test';
-  document.getElementById('modalTitle').textContent = '添加卡密';
   document.getElementById('codeInput').value = '';
   document.querySelectorAll('.cat-opt').forEach(o => o.classList.toggle('selected', o.dataset.cat === 'test'));
   document.getElementById('addModal').classList.add('show');
@@ -1115,12 +1243,12 @@ document.getElementById('cardList').addEventListener('click', e => {
     render();
     toast('已恢复为未使用');
   } else if (act === 'del') {
-    showConfirm('确认删除这张卡密？', () => {
+    showConfirm('删除卡密', '确认删除这张卡密？此操作不可恢复。', () => {
       state.cards = state.cards.filter(c => c.id !== id);
       save();
       render();
       toast('已删除');
-    }, '🗑️');
+    });
   } else if (act === 'copy') {
     const text = card.code;
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1142,7 +1270,7 @@ function fallbackCopy(text) {
     document.execCommand('copy');
     toast('已复制');
   } catch (e) {
-    toast('复制失败，请手动选择');
+    toast('复制失败');
   }
   document.body.removeChild(ta);
 }
@@ -1228,7 +1356,7 @@ document.getElementById('importFile').addEventListener('change', e => {
       const data = JSON.parse(ev.target.result);
       if (!data.cards || !Array.isArray(data.cards)) throw new Error('格式错误');
       const validCards = data.cards.filter(c => c.status !== 'scrapped');
-      showConfirm('导入将合并到现有数据，共 ' + validCards.length + ' 张，继续？', () => {
+      showConfirm('导入备份', '导入将合并到现有数据，共 ' + validCards.length + ' 张，继续？', () => {
         if (data.totals) {
           state.totals.sold += data.totals.sold || 0;
           state.totals.cost += data.totals.cost || 0;
@@ -1242,7 +1370,7 @@ document.getElementById('importFile').addEventListener('change', e => {
         save();
         render();
         toast('已导入 ' + validCards.length + ' 张');
-      }, '📥');
+      });
     } catch (err) {
       toast('文件格式错误');
     }
@@ -1253,13 +1381,13 @@ document.getElementById('importFile').addEventListener('change', e => {
 
 document.getElementById('menuClearAll').addEventListener('click', () => {
   document.getElementById('menuMask').classList.remove('show');
-  showConfirm('确认清空所有卡密数据？\n\n此操作不可恢复！', () => {
+  showConfirm('清空数据', '确认清空所有卡密数据？\n\n此操作不可恢复！', () => {
     state.cards = [];
     state.totals = { sold: 0, cost: 0, income: 0 };
     save();
     render();
     toast('已清空');
-  }, '⚠️');
+  });
 });
 
 [document.getElementById('addModal'), document.getElementById('menuMask'), document.getElementById('confirmMask')].forEach(m => {
